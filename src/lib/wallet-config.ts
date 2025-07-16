@@ -5,7 +5,7 @@ import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Your Reown Project ID - replace with your actual project ID
-const projectId = 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6'
+const projectId = '9785898c896f6a210f2a97514430940e'
 
 // Set up the Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
