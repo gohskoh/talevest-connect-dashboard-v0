@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { Link, useLocation } from "react-router-dom"
+import { Menu, X } from "lucide-react"
 
 interface HeaderProps {
   onConnectWallet: () => void
@@ -8,7 +10,8 @@ interface HeaderProps {
 }
 
 const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
-  const [activeNav, setActiveNav] = useState<string>("")
+  const location = useLocation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navItems = [
     { name: "F.Y.T.S.", href: "/fyts" },
@@ -20,44 +23,90 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`
   }
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/90">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">T</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">T</span>
             </div>
-            <span className="text-xl font-bold text-foreground">Talevest</span>
-          </div>
+            <span className="text-lg font-semibold text-foreground">Talevest</span>
+          </Link>
 
-          {/* Navigation */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  activeNav === item.name ? "text-primary" : "text-muted-foreground"
+                  location.pathname === item.href ? "text-primary" : "text-muted-foreground"
                 }`}
-                onMouseEnter={() => setActiveNav(item.name)}
-                onMouseLeave={() => setActiveNav("")}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          {/* Connect Wallet Button */}
+          {/* Desktop Connect Wallet Button */}
+          <div className="hidden md:block">
+            <Button
+              onClick={onConnectWallet}
+              variant={isConnected ? "outline" : "gradient"}
+              size="default"
+              className="text-sm"
+            >
+              {isConnected ? formatAddress(address || "") : "Connect Wallet"}
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
           <Button
-            onClick={onConnectWallet}
-            variant={isConnected ? "outline" : "gradient"}
-            size="default"
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleMobileMenu}
           >
-            {isConnected ? formatAddress(address || "") : "Connect Wallet"}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-border">
+            <nav className="flex flex-col space-y-4 mt-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    location.pathname === item.href ? "text-primary" : "text-muted-foreground"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Button
+                onClick={() => {
+                  onConnectWallet()
+                  setIsMobileMenuOpen(false)
+                }}
+                variant={isConnected ? "outline" : "gradient"}
+                size="default"
+                className="text-sm w-full mt-4"
+              >
+                {isConnected ? formatAddress(address || "") : "Connect Wallet"}
+              </Button>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   )

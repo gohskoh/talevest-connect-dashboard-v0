@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Link } from "react-router-dom"
 
 const HeroSection = () => {
   return (
@@ -9,7 +10,7 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-6 text-center relative z-10">
         {/* Badge */}
-        <Badge variant="outline" className="mb-8 bg-primary/10 border-primary/30 text-primary">
+        <Badge variant="outline" className="mb-8 bg-primary/10 border-primary/30 text-primary text-sm">
           World's First Human Talent Exchange
         </Badge>
 
@@ -29,14 +30,18 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Button size="lg" variant="gradient">
-            Discover Talents
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+          <Button size="lg" variant="gradient" asChild>
+            <Link to="/fyts">
+              Discover Talents
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </Button>
-          <Button size="lg" variant="outline">
-            Start Trading
+          <Button size="lg" variant="outline" asChild>
+            <Link to="/floor">
+              Start Trading
+            </Link>
           </Button>
         </div>
       </div>

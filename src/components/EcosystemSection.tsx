@@ -1,36 +1,41 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Users, TrendingUp, Coins, Shield } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const EcosystemSection = () => {
   const ecosystemItems = [
     {
-      icon: <Users className="w-8 h-8 text-primary" />,
+      icon: <Users className="w-6 h-6 text-muted-foreground" />,
       title: "F.Y.T.S.",
       description: "Find Your Talent Section - Social platform for talent discovery and onboarding",
       cta: "Explore Talents",
-      href: "/fyts"
+      href: "/fyts",
+      ctaColor: "text-muted-foreground"
     },
     {
-      icon: <TrendingUp className="w-8 h-8 text-primary" />,
+      icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
       title: "The Floor",
       description: "NFT-powered trading marketplace for talent investments",
       cta: "Start Trading",
-      href: "/floor"
+      href: "/floor",
+      ctaColor: "text-blue-400"
     },
     {
-      icon: <Coins className="w-8 h-8 text-primary" />,
+      icon: <Coins className="w-6 h-6 text-yellow-400" />,
       title: "TVST Token",
       description: "Governance and utility token with exclusive benefits",
       cta: "Learn More",
-      href: "/token"
+      href: "/token",
+      ctaColor: "text-yellow-400"
     },
     {
-      icon: <Shield className="w-8 h-8 text-primary" />,
+      icon: <Shield className="w-6 h-6 text-green-400" />,
       title: "Legal NFTs",
       description: "Immutable proof of investment contracts on Ethereum",
       cta: "View Contracts",
-      href: "/contracts"
+      href: "/contracts",
+      ctaColor: "text-green-400"
     }
   ]
 
@@ -52,31 +57,31 @@ const EcosystemSection = () => {
           {ecosystemItems.map((item, index) => (
             <Card 
               key={index} 
-              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105 group"
+              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105 group p-6"
             >
-              <CardHeader className="pb-4">
-                <div className="mb-4 p-3 bg-primary/10 rounded-lg w-fit group-hover:bg-primary/20 transition-colors">
+              <CardHeader className="pb-4 p-0">
+                <div className="mb-4">
                   {item.icon}
                 </div>
-                <CardTitle className="text-xl font-bold">
+                <CardTitle className="text-xl font-bold mb-2">
                   {item.title}
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <CardDescription className="text-muted-foreground leading-relaxed">
+                <CardDescription className="text-muted-foreground leading-relaxed text-sm mb-4">
                   {item.description}
                 </CardDescription>
+              </CardHeader>
+              <CardContent className="p-0">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-between hover:bg-primary/10 text-primary"
+                  className={`w-full justify-between hover:bg-transparent p-0 h-auto ${item.ctaColor}`}
                   asChild
                 >
-                  <a href={item.href}>
+                  <Link to={item.href}>
                     {item.cta}
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </a>
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import FYTS from "./pages/FYTS";
 import Floor from "./pages/Floor";
 import Token from "./pages/Token";
+import Contracts from "./pages/Contracts";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/fyts" element={<FYTS />} />
             <Route path="/floor" element={<Floor />} />
             <Route path="/token" element={<Token />} />
+            <Route path="/contracts" element={<Contracts />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
