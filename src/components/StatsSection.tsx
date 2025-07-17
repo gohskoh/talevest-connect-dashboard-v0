@@ -1,38 +1,51 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
 const StatsSection = () => {
   const stats = [
     {
-      value: "$60B+",
-      label: "Global Sports Market"
+      number: "$60B+",
+      label: "Global Sports Market",
+      description: ""
     },
     {
-      value: "21M",
-      label: "TVST Token Supply"
+      number: "21M",
+      label: "TVST Token Supply",
+      description: ""
     },
     {
-      value: "10K",
-      label: "Max NFTs per ITO"
+      number: "10K",
+      label: "Max NFTs per ITO",
+      description: ""
     },
     {
-      value: "35%",
-      label: "NFT Investment CAGR"
+      number: "35%",
+      label: "NFT Investment CAGR",
+      description: ""
     }
   ]
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center group">
-              <div className="mb-4 p-8 bg-gradient-card rounded-2xl border border-border/50 group-hover:border-primary/50 transition-all duration-300">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-lg font-semibold text-foreground">
+            <Card key={index} className="bg-white border border-gray-200 text-center">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                  {stat.number}
+                </CardTitle>
+                <h3 className="text-xl font-semibold mb-2 text-gray-700">
                   {stat.label}
-                </div>
-              </div>
-            </div>
+                </h3>
+              </CardHeader>
+              {stat.description && (
+                <CardContent>
+                  <p className="text-gray-600 text-sm">
+                    {stat.description}
+                  </p>
+                </CardContent>
+              )}
+            </Card>
           ))}
         </div>
       </div>

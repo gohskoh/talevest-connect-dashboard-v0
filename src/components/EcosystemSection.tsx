@@ -1,86 +1,72 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Users, TrendingUp, Coins, Shield } from "lucide-react"
+import { Users, BarChart3, Coins, Shield } from "lucide-react"
 import { Link } from "react-router-dom"
 
 const EcosystemSection = () => {
   const ecosystemItems = [
     {
-      icon: <Users className="w-6 h-6 text-muted-foreground" />,
+      icon: <Users className="w-8 h-8 text-purple-600" />,
       title: "F.Y.T.S.",
       description: "Find Your Talent Section - Social platform for talent discovery and onboarding",
-      cta: "Explore Talents",
-      href: "/fyts",
-      ctaColor: "text-muted-foreground"
+      link: "/fyts",
+      linkText: "Explore Talents →"
     },
     {
-      icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
+      icon: <BarChart3 className="w-8 h-8 text-blue-600" />,
       title: "The Floor",
       description: "NFT-powered trading marketplace for talent investments",
-      cta: "Start Trading",
-      href: "/floor",
-      ctaColor: "text-blue-400"
+      link: "/floor",
+      linkText: "Start Trading →"
     },
     {
-      icon: <Coins className="w-6 h-6 text-yellow-400" />,
+      icon: <Coins className="w-8 h-8 text-yellow-600" />,
       title: "TVST Token",
       description: "Governance and utility token with exclusive benefits",
-      cta: "Learn More",
-      href: "/token",
-      ctaColor: "text-yellow-400"
+      link: "/token",
+      linkText: "Learn More →"
     },
     {
-      icon: <Shield className="w-6 h-6 text-green-400" />,
+      icon: <Shield className="w-8 h-8 text-green-600" />,
       title: "Legal NFTs",
       description: "Immutable proof of investment contracts on Ethereum",
-      cta: "View Contracts",
-      href: "/contracts",
-      ctaColor: "text-green-400"
+      link: "/contracts",
+      linkText: "View Contracts →"
     }
   ]
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
             The Talevest Ecosystem
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Four interconnected components revolutionizing human capital investment
           </p>
         </div>
 
         {/* Ecosystem Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {ecosystemItems.map((item, index) => (
-            <Card 
-              key={index} 
-              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105 group p-6"
-            >
-              <CardHeader className="pb-4 p-0">
-                <div className="mb-4">
+            <Card key={index} className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center">
                   {item.icon}
                 </div>
-                <CardTitle className="text-xl font-bold mb-2">
+                <CardTitle className="text-2xl font-bold mb-2 text-gray-900">
                   {item.title}
                 </CardTitle>
-                <CardDescription className="text-muted-foreground leading-relaxed text-sm mb-4">
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-gray-600 mb-6 leading-relaxed">
                   {item.description}
                 </CardDescription>
-              </CardHeader>
-              <CardContent className="p-0">
-                <Button 
-                  variant="ghost" 
-                  className={`w-full justify-between hover:bg-transparent p-0 h-auto ${item.ctaColor}`}
-                  asChild
-                >
-                  <Link to={item.href}>
-                    {item.cta}
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                <Button variant="ghost" className="text-gray-600 hover:text-gray-800" asChild>
+                  <Link to={item.link}>
+                    {item.linkText}
                   </Link>
                 </Button>
               </CardContent>
