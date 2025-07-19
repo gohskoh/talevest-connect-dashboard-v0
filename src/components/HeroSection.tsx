@@ -4,49 +4,88 @@ import { Link } from "react-router-dom"
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900 flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-hero-dark flex items-center justify-center overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIiAvPgo8L3N2Zz4K')] opacity-40"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIiAvPgo8L3N2Zz4K')] opacity-30"></div>
       
       <div className="container mx-auto px-6 text-center relative z-10">
         {/* Badge */}
-        <Badge variant="outline" className="mb-8 bg-white/10 border-white/20 text-white text-sm">
-          World's First Human Talent Exchange
+        <Badge variant="outline" className="mb-8 bg-primary/10 border-primary/30 text-primary text-sm backdrop-blur-sm">
+          🌟 World's First Human Talent Exchange
         </Badge>
 
         {/* Main Heading */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-foreground">
           Invest in the Future of{" "}
-          <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Talent
+          <span className="bg-gradient-primary bg-clip-text text-transparent">
+            Human Talent
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
           Crowdfund talented individuals through cryptocurrency and blockchain. Own NFTs as{" "}
-          <span className="text-white font-medium">Proof of Investment</span> and earn dividends from their future success.
+          <span className="text-primary font-semibold">Proof of Investment</span> and earn dividends from their future success.
         </p>
+
+        {/* Key Features */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+          <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6">
+            <div className="text-2xl mb-2">🎯</div>
+            <h3 className="font-semibold text-card-foreground mb-2">Invest Early</h3>
+            <p className="text-sm text-muted-foreground">Get in early on the next sports superstar or entertainment icon</p>
+          </div>
+          <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6">
+            <div className="text-2xl mb-2">💰</div>
+            <h3 className="font-semibold text-card-foreground mb-2">Earn Dividends</h3>
+            <p className="text-sm text-muted-foreground">Receive 10% of talent's professional earnings annually</p>
+          </div>
+          <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6">
+            <div className="text-2xl mb-2">🔒</div>
+            <h3 className="font-semibold text-card-foreground mb-2">Secure NFTs</h3>
+            <p className="text-sm text-muted-foreground">Immutable proof of investment on Ethereum blockchain</p>
+          </div>
+        </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Button size="lg" className="bg-white text-purple-900 hover:bg-white/90" asChild>
+          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg" asChild>
             <Link to="/fyts">
-              Discover Talents
+              🔍 Discover Talents
             </Link>
           </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 shadow-lg" asChild>
             <Link to="/floor">
-              Start Trading
+              📈 Start Trading
             </Link>
           </Button>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary">$60B+</div>
+            <div className="text-sm text-muted-foreground">Sports Market</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary">21M</div>
+            <div className="text-sm text-muted-foreground">TVST Supply</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary">10K</div>
+            <div className="text-sm text-muted-foreground">Max NFTs/ITO</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary">35%</div>
+            <div className="text-sm text-muted-foreground">Investment CAGR</div>
+          </div>
         </div>
       </div>
 
       {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-blue-400/20 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
+      <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 bg-accent/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/10 rounded-full blur-lg animate-pulse delay-500"></div>
     </section>
   )
 }
