@@ -28,15 +28,15 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/90">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gradient-hero/90 border-b border-white/10">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
               <span className="text-white font-bold text-sm">T</span>
             </div>
-            <span className="text-lg font-semibold text-foreground">Talevest</span>
+            <span className="text-lg font-semibold text-white">Talevest</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -45,8 +45,8 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === item.href ? "text-primary" : "text-muted-foreground"
+                className={`text-sm font-medium transition-colors hover:text-white ${
+                  location.pathname === item.href ? "text-white" : "text-white/70"
                 }`}
               >
                 {item.name}
@@ -58,9 +58,9 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
           <div className="hidden md:block">
             <Button
               onClick={onConnectWallet}
-              variant={isConnected ? "outline" : "gradient"}
+              variant="outline"
               size="default"
-              className="text-sm"
+              className="text-sm bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50"
             >
               {isConnected ? formatAddress(address || "") : "Connect Wallet"}
             </Button>
@@ -70,7 +70,7 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-white hover:bg-white/10"
             onClick={toggleMobileMenu}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -79,14 +79,14 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-border">
+          <div className="md:hidden mt-4 pb-4 border-t border-white/20">
             <nav className="flex flex-col space-y-4 mt-4">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location.pathname === item.href ? "text-primary" : "text-muted-foreground"
+                  className={`text-sm font-medium transition-colors hover:text-white ${
+                    location.pathname === item.href ? "text-white" : "text-white/70"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -98,9 +98,9 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
                   onConnectWallet()
                   setIsMobileMenuOpen(false)
                 }}
-                variant={isConnected ? "outline" : "gradient"}
+                variant="outline"
                 size="default"
-                className="text-sm w-full mt-4"
+                className="text-sm w-full mt-4 bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50"
               >
                 {isConnected ? formatAddress(address || "") : "Connect Wallet"}
               </Button>

@@ -28,7 +28,7 @@ const HowItWorksSection = () => {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             How Talevest Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

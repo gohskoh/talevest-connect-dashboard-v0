@@ -56,7 +56,7 @@ const Floor = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-hero">
       <Header 
         onConnectWallet={handleConnectWallet}
         isConnected={isConnected}
@@ -66,38 +66,38 @@ const Floor = () => {
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               The Floor
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
               Trade talent NFTs on the world's first human capital marketplace
             </p>
           </div>
 
           {/* Market Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <Card className="bg-white border border-gray-200">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-gray-900">$2.1M</div>
-                <div className="text-sm text-gray-600">Total Volume</div>
+                <div className="text-2xl font-bold text-white">$2.1M</div>
+                <div className="text-sm text-white/70">Total Volume</div>
               </CardContent>
             </Card>
-            <Card className="bg-white border border-gray-200">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-gray-900">3,820</div>
-                <div className="text-sm text-gray-600">Active Traders</div>
+                <div className="text-2xl font-bold text-white">3,820</div>
+                <div className="text-sm text-white/70">Active Traders</div>
               </CardContent>
             </Card>
-            <Card className="bg-white border border-gray-200">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-gray-900">156</div>
-                <div className="text-sm text-gray-600">Listed Talents</div>
+                <div className="text-2xl font-bold text-white">156</div>
+                <div className="text-sm text-white/70">Listed Talents</div>
               </CardContent>
             </Card>
-            <Card className="bg-white border border-gray-200">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">+24.5%</div>
-                <div className="text-sm text-gray-600">24h Change</div>
+                <div className="text-2xl font-bold text-green-400">+24.5%</div>
+                <div className="text-sm text-white/70">24h Change</div>
               </CardContent>
             </Card>
           </div>
@@ -105,36 +105,36 @@ const Floor = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Market Overview */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Market Overview</h2>
-              <Card className="bg-white border border-gray-200">
+              <h2 className="text-2xl font-bold text-white mb-4">Market Overview</h2>
+              <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
                 <CardContent className="p-0">
                   <div className="space-y-0">
                     {marketData.map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-4 border-b border-gray-200 last:border-b-0">
+                      <div key={index} className="flex items-center justify-between p-4 border-b border-white/20 last:border-b-0">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-sm font-bold text-gray-700">
+                          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold text-white">
                             {item.symbol}
                           </div>
                           <div>
-                            <div className="font-medium text-gray-900">{item.symbol}</div>
-                            <div className="text-sm text-gray-600">{item.name}</div>
+                            <div className="font-medium text-white">{item.symbol}</div>
+                            <div className="text-sm text-white/70">{item.name}</div>
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-900">{item.price}</div>
-                          <div className={`text-sm ${item.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                          <div className="font-medium text-white">{item.price}</div>
+                          <div className={`text-sm ${item.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
                             {item.change}
                           </div>
                         </div>
-                        <div className="text-right text-sm text-gray-600">
+                        <div className="text-right text-sm text-white/70">
                           <div>{item.volume}</div>
                           <div>Volume</div>
                         </div>
-                        <div className="text-right text-sm text-gray-600">
+                        <div className="text-right text-sm text-white/70">
                           <div>{item.marketCap}</div>
                           <div>Market Cap</div>
                         </div>
-                        <div className="text-right text-sm text-gray-600">
+                        <div className="text-right text-sm text-white/70">
                           <div>{item.holders}</div>
                           <div>Holders</div>
                         </div>
@@ -147,65 +147,65 @@ const Floor = () => {
 
             {/* Trading Panel */}
             <div>
-              <Card className="bg-white border border-gray-200 mb-6">
+              <Card className="bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-sm font-bold text-gray-700">
+                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold text-white">
                       MAR
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900">MAR</div>
-                      <div className="text-sm text-gray-600">Marcus Rodriguez</div>
+                      <div className="font-bold text-white">MAR</div>
+                      <div className="text-sm text-white/70">Marcus Rodriguez</div>
                     </div>
                   </div>
                   <div className="mt-4">
-                    <div className="text-sm text-gray-600">Current Price</div>
-                    <div className="text-lg font-bold text-gray-900">0.067 ETH</div>
-                    <div className="text-sm text-green-600">24h Change +12.5%</div>
-                    <div className="text-sm text-gray-600 mt-2">Market Cap 670 ETH</div>
+                    <div className="text-sm text-white/70">Current Price</div>
+                    <div className="text-lg font-bold text-white">0.067 ETH</div>
+                    <div className="text-sm text-green-400">24h Change +12.5%</div>
+                    <div className="text-sm text-white/70 mt-2">Market Cap 670 ETH</div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="font-bold text-gray-900 mb-4">Trade MAR</h3>
+                  <h3 className="font-bold text-white mb-4">Trade MAR</h3>
                   <div className="flex gap-2 mb-4">
                     <Button className="flex-1 bg-green-600 hover:bg-green-700">Buy</Button>
-                    <Button variant="outline" className="flex-1">Sell</Button>
+                    <Button variant="outline" className="flex-1 bg-transparent border-white/30 text-white hover:bg-white/10">Sell</Button>
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <label className="text-sm text-gray-600">Amount (NFTs)</label>
-                      <input className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md" placeholder="0" />
+                      <label className="text-sm text-white/70">Amount (NFTs)</label>
+                      <input className="w-full mt-1 px-3 py-2 bg-white/10 border border-white/30 rounded-md text-white placeholder-white/50" placeholder="0" />
                     </div>
                     <div>
-                      <label className="text-sm text-gray-600">Price per NFT (ETH)</label>
-                      <input className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md" placeholder="0.067" />
+                      <label className="text-sm text-white/70">Price per NFT (ETH)</label>
+                      <input className="w-full mt-1 px-3 py-2 bg-white/10 border border-white/30 rounded-md text-white placeholder-white/50" placeholder="0.067" />
                     </div>
-                    <div className="text-sm text-gray-600">
-                      Total Cost <span className="font-medium">0.00 ETH</span>
+                    <div className="text-sm text-white/70">
+                      Total Cost <span className="font-medium text-white">0.00 ETH</span>
                     </div>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Place Buy Order</Button>
+                    <Button className="w-full bg-white text-primary hover:bg-white/90">Place Buy Order</Button>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Recent Trades */}
-              <Card className="bg-white border border-gray-200">
+              <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
                 <CardHeader>
-                  <h3 className="font-bold text-gray-900">Recent Trades</h3>
+                  <h3 className="font-bold text-white">Recent Trades</h3>
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="space-y-0">
                     {recentTrades.map((trade, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border-b border-gray-200 last:border-b-0">
+                      <div key={index} className="flex items-center justify-between p-3 border-b border-white/20 last:border-b-0">
                         <div className="flex items-center gap-2">
-                          <Badge variant={trade.type === 'BUY' ? 'default' : 'secondary'} className={trade.type === 'BUY' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                          <Badge variant={trade.type === 'BUY' ? 'default' : 'secondary'} className={trade.type === 'BUY' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}>
                             {trade.type}
                           </Badge>
-                          <span className="font-medium text-gray-900">{trade.symbol}</span>
+                          <span className="font-medium text-white">{trade.symbol}</span>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-gray-900">{trade.amount}</div>
-                          <div className="text-xs text-gray-600">{trade.time}</div>
+                          <div className="text-sm text-white">{trade.amount}</div>
+                          <div className="text-xs text-white/70">{trade.time}</div>
                         </div>
                       </div>
                     ))}

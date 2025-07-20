@@ -41,31 +41,31 @@ const StatsSection = () => {
       <div className="container mx-auto px-6">
         {/* Market Statistics */}
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">📊 Market Analysis</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+          <Badge className="mb-4 bg-white/10 text-white border-white/20">📊 Market Analysis</Badge>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Market Opportunity
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-white/80 max-w-2xl mx-auto">
             Capturing the massive global talent investment market with blockchain innovation
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {stats.map((stat, index) => (
-            <Card key={index} className="bg-gradient-card border border-border text-center hover:border-primary/30 transition-all duration-300 hover:scale-105 group">
+            <Card key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 text-center hover:border-white/40 transition-all duration-300 hover:scale-105 group">
               <CardHeader className="pb-4">
-                <CardTitle className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">
+                <CardTitle className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">
                   {stat.number}
                 </CardTitle>
-                <h3 className="text-lg font-semibold mb-2 text-card-foreground">
+                <h3 className="text-lg font-semibold mb-2 text-white">
                   {stat.label}
                 </h3>
-                <div className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                <div className="inline-flex items-center gap-1 px-2 py-1 bg-white/10 text-white text-xs rounded-full">
                   {stat.trend}
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-white/70 text-sm leading-relaxed">
                   {stat.description}
                 </p>
               </CardContent>
@@ -74,10 +74,10 @@ const StatsSection = () => {
         </div>
 
         {/* Roadmap Section */}
-        <div className="bg-gradient-card border border-border rounded-2xl p-8">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-card-foreground mb-4">Development Roadmap</h3>
-            <p className="text-muted-foreground">Our strategic plan to revolutionize human capital investment</p>
+            <h3 className="text-3xl font-bold text-white mb-4">Development Roadmap</h3>
+            <p className="text-white/70">Our strategic plan to revolutionize human capital investment</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -85,25 +85,25 @@ const StatsSection = () => {
               <div key={index} className="relative">
                 <div className={`p-6 rounded-xl border-2 transition-all duration-300 ${
                   milestone.status === 'upcoming' 
-                    ? 'border-primary bg-primary/5 hover:bg-primary/10' 
-                    : 'border-border bg-background/50 hover:bg-background/80'
+                    ? 'border-white/40 bg-white/5 hover:bg-white/10' 
+                    : 'border-white/20 bg-white/5 hover:bg-white/10'
                 }`}>
                   <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3 ${
                     milestone.status === 'upcoming' 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'bg-muted text-muted-foreground'
+                      ? 'bg-white text-primary' 
+                      : 'bg-white/20 text-white/70'
                   }`}>
                     {milestone.phase}
                   </div>
-                  <h4 className="font-semibold text-card-foreground mb-2">{milestone.title}</h4>
+                  <h4 className="font-semibold text-white mb-2">{milestone.title}</h4>
                   <div className={`text-xs capitalize ${
-                    milestone.status === 'upcoming' ? 'text-primary' : 'text-muted-foreground'
+                    milestone.status === 'upcoming' ? 'text-white' : 'text-white/70'
                   }`}>
                     {milestone.status}
                   </div>
                 </div>
                 {index < milestones.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-border transform -translate-y-1/2"></div>
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-white/30 transform -translate-y-1/2"></div>
                 )}
               </div>
             ))}
