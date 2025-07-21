@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
+import talevest_logo from "@/assets/talevest-logo.png"
 
 interface HeaderProps {
   onConnectWallet: () => void
@@ -28,14 +29,12 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gradient-hero/90 border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-hero border-b border-white/10">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
-              <span className="text-white font-bold text-sm">T</span>
-            </div>
+            <img src={talevest_logo} alt="Talevest" className="w-8 h-8 rounded-lg" />
             <span className="text-lg font-semibold text-white">Talevest</span>
           </Link>
 
@@ -60,7 +59,7 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
               onClick={onConnectWallet}
               variant="outline"
               size="default"
-              className="text-sm bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+              className="text-sm bg-transparent border-white/40 text-white hover:bg-white/10 hover:border-white/60 shadow-lg backdrop-blur-sm"
             >
               {isConnected ? formatAddress(address || "") : "Connect Wallet"}
             </Button>
@@ -100,7 +99,7 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
                 }}
                 variant="outline"
                 size="default"
-                className="text-sm w-full mt-4 bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+                className="text-sm w-full mt-4 bg-transparent border-white/40 text-white hover:bg-white/10 hover:border-white/60 shadow-lg backdrop-blur-sm"
               >
                 {isConnected ? formatAddress(address || "") : "Connect Wallet"}
               </Button>
