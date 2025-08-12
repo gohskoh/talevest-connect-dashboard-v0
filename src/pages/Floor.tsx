@@ -63,8 +63,13 @@ const Floor = () => {
         address={address}
       />
       
-      <main className="pt-32 pb-16">
-        <div className="container mx-auto px-6">
+      <main className="pt-32 pb-16 relative">
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-xl px-6 py-3 shadow-2xl">
+            Coming Soon
+          </div>
+        </div>
+        <div className="container mx-auto px-6 blur-sm pointer-events-none">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               The Floor

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
-import talevest_logo from "@/assets/talevest-logo.png"
+
 
 interface HeaderProps {
   onConnectWallet: () => void
@@ -17,7 +17,8 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
   const navItems = [
     { name: "F.Y.T.S.", href: "/fyts" },
     { name: "The Floor", href: "/floor" },
-    { name: "TVST Token", href: "/token" }
+    { name: "TVST Token", href: "/token" },
+    { name: "Talent Voting", href: "/vote" }
   ]
 
   const formatAddress = (addr: string) => {
@@ -34,7 +35,7 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={talevest_logo} alt="Talevest" className="w-8 h-8 rounded-lg" />
+            <img src="/lovable-uploads/fe0566bd-7ad0-4860-b641-05fb5f359d97.png" alt="Talevest logo - talent investing platform" className="w-8 h-8 rounded-lg" loading="eager" />
             <span className="text-lg font-semibold text-white">Talevest</span>
           </Link>
 
