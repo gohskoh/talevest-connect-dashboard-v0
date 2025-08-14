@@ -62,9 +62,15 @@ const Vote = () => {
           <div className="text-center mb-10">
             <Badge className="mb-4 bg-white/10 text-white border-white/20">🗳️ Community Voting</Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">Talent Voting</h1>
-            <p className="text-white/80 max-w-3xl mx-auto">
+            <p className="text-white/80 max-w-3xl mx-auto mb-6">
               Help the community decide which verified talent should launch their Initial Talent Offering (ITO) next.
             </p>
+            <Button 
+              onClick={() => window.location.href = '/talent-application'} 
+              className="bg-white text-primary hover:bg-white/90"
+            >
+              Apply to list your own talent
+            </Button>
           </div>
 
           {/* Voting Stats */}

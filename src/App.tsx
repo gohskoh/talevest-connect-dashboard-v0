@@ -11,6 +11,8 @@ import Floor from "./pages/Floor";
 import Token from "./pages/Token";
 import Vote from "./pages/Vote";
 import Contracts from "./pages/Contracts";
+import Auth from "./pages/Auth";
+import TalentApplication from "./pages/TalentApplication";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/token" element={<Token />} />
             <Route path="/contracts" element={<Contracts />} />
             <Route path="/vote" element={<Vote />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/talent-application" element={<TalentApplication />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
