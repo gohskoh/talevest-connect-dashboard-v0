@@ -14,7 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      talent_applications: {
+        Row: {
+          age: number
+          application_status: string
+          contact_email: string
+          created_at: string
+          description: string
+          full_name: string
+          id: string
+          location: string | null
+          phone_number: string | null
+          social_media_handles: Json | null
+          talent_category: string
+          updated_at: string
+          user_id: string
+          video_file_name: string | null
+          video_url: string | null
+        }
+        Insert: {
+          age: number
+          application_status?: string
+          contact_email: string
+          created_at?: string
+          description: string
+          full_name: string
+          id?: string
+          location?: string | null
+          phone_number?: string | null
+          social_media_handles?: Json | null
+          talent_category: string
+          updated_at?: string
+          user_id: string
+          video_file_name?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          age?: number
+          application_status?: string
+          contact_email?: string
+          created_at?: string
+          description?: string
+          full_name?: string
+          id?: string
+          location?: string | null
+          phone_number?: string | null
+          social_media_handles?: Json | null
+          talent_category?: string
+          updated_at?: string
+          user_id?: string
+          video_file_name?: string | null
+          video_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
