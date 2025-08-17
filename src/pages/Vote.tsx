@@ -5,11 +5,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useEffect, useMemo, useState } from "react"
+import { useWallet } from '@solana/wallet-adapter-react'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useVoting } from '../hooks/useVoting'
 
 // Talent Voting Page
 const Vote = () => {
   const { address, isConnected } = useAccount()
   const { disconnect } = useDisconnect()
+  const solanaWallet = useWallet()
+  const voting = useVoting()
 
   const handleConnectWallet = () => {
     if (isConnected) disconnect()
@@ -37,20 +42,22 @@ const Vote = () => {
     canonical.href = window.location.href
   }, [])
 
-  type Talent = { id: string; name: string; category: string; blurb: string; avatar: string }
+  type Talent = { id: string; name: string; category: string; blurb: string; avatar: string; candidate: 0 | 1 }
 
   const initialTalents: Talent[] = useMemo(() => ([
-    { id: 'MAR', name: 'Marcus Rodriguez', category: 'Sports • Football', blurb: 'Lightning-fast striker and youth champion.', avatar: 'MR' },
-    { id: 'SCH', name: 'Sophia Chen', category: 'Entertainment • Creator', blurb: 'Viral creator with explosive growth.', avatar: 'SC' },
-    { id: 'EWA', name: 'Emma Walsh', category: 'Art • Digital', blurb: 'NFT-native artist with sold-out drops.', avatar: 'EW' },
-    { id: 'AIP', name: 'Aisha Patel', category: 'Sports • Tennis', blurb: 'National finalist with Olympic ambitions.', avatar: 'AP' },
+    { id: 'MAR', name: 'Marcus Rodriguez', category: 'Sports • Football', blurb: 'Lightning-fast striker and youth champion.', avatar: 'MR', candidate: 0 },
+    { id: 'SCH', name: 'Sophia Chen', category: 'Entertainment • Creator', blurb: 'Viral creator with explosive growth.', avatar: 'SC', candidate: 1 },
+    { id: 'EWA', name: 'Emma Walsh', category: 'Art • Digital', blurb: 'NFT-native artist with sold-out drops.', avatar: 'EW', candidate: 0 },
+    { id: 'AIP', name: 'Aisha Patel', category: 'Sports • Tennis', blurb: 'National finalist with Olympic ambitions.', avatar: 'AP', candidate: 1 },
   ]), [])
 
-  const [votes, setVotes] = useState<Record<string, number>>({})
-  const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0)
+  // Use blockchain data for vote counts
+  const candidateAVotes = voting.votingResults.candidateAVotes
+  const candidateBVotes = voting.votingResults.candidateBVotes
+  const totalVotes = voting.votingResults.totalVotes
 
-  const castVote = (id: string) => {
-    setVotes((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }))
+  const castVote = async (talent: Talent) => {
+    await voting.castVote(talent.candidate, talent.name)
   }
 
   return (
@@ -65,12 +72,22 @@ const Vote = () => {
             <p className="text-white/80 max-w-3xl mx-auto mb-6">
               Help the community decide which verified talent should launch their Initial Talent Offering (ITO) next.
             </p>
-            <Button 
-              onClick={() => window.location.href = '/talent-application'} 
-              className="bg-white text-primary hover:bg-white/90"
-            >
-              Apply to list your own talent
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <WalletMultiButton className="!bg-white !text-primary hover:!bg-white/90 !border-0 !rounded-lg !font-semibold !px-6 !py-3" />
+              <Button 
+                onClick={() => window.location.href = '/talent-application'} 
+                className="bg-white/10 text-white border border-white/20 hover:bg-white/20"
+              >
+                Apply to list your own talent
+              </Button>
+            </div>
+            {solanaWallet.connected && (
+              <div className="flex items-center justify-center gap-6 text-sm text-white/70">
+                <span>TVST Balance: {voting.tvstBalance.toFixed(2)}</span>
+                <span>SOL Balance: {voting.solBalance.toFixed(3)}</span>
+                {voting.hasVoted && <Badge className="bg-green-500/20 text-green-400 border-green-500/30">✓ Voted</Badge>}
+              </div>
+            )}
           </div>
 
           {/* Voting Stats */}
@@ -97,8 +114,11 @@ const Vote = () => {
           {/* Talent Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {initialTalents.map((t) => {
-              const v = votes[t.id] || 0
-              const share = totalVotes ? Math.round((v / totalVotes) * 100) : 0
+              // Get votes for this candidate from blockchain
+              const v = t.candidate === 0 ? candidateAVotes : candidateBVotes
+              const share = totalVotes > 0 ? Math.round((v / totalVotes) * 100) : 0
+              const isDisabled = !voting.canVote || voting.isVoting || voting.hasVoted
+              
               return (
                 <Card key={t.id} className="bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all">
                   <CardHeader>
@@ -124,8 +144,12 @@ const Vote = () => {
                     <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mb-4">
                       <div className="h-2 bg-white/60 rounded-full transition-all" style={{ width: `${share}%` }} />
                     </div>
-                    <Button onClick={() => castVote(t.id)} className="w-full bg-white text-primary hover:bg-white/90">
-                      Vote for {t.name.split(' ')[0]}
+                    <Button 
+                      onClick={() => castVote(t)} 
+                      disabled={isDisabled}
+                      className="w-full bg-white text-primary hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {voting.isVoting ? 'Voting...' : voting.hasVoted ? 'Already Voted' : `Vote for ${t.name.split(' ')[0]}`}
                     </Button>
                   </CardContent>
                 </Card>
