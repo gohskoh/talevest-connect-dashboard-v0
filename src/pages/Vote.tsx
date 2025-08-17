@@ -72,6 +72,22 @@ const Vote = () => {
             <p className="text-white/80 max-w-3xl mx-auto mb-6">
               Help the community decide which verified talent should launch their Initial Talent Offering (ITO) next.
             </p>
+            {/* Devnet Network Notice */}
+            <div className="bg-orange-500/20 border border-orange-500/30 rounded-lg p-4 mb-6 max-w-2xl mx-auto">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-orange-400">⚠️</span>
+                <h3 className="text-orange-300 font-semibold">Important: Switch to Devnet</h3>
+              </div>
+              <p className="text-orange-200 text-sm">
+                This voting system runs on <strong>Solana Devnet</strong>. Please:
+              </p>
+              <ol className="text-orange-200 text-sm mt-2 ml-4 list-decimal">
+                <li>Open your Phantom wallet settings</li>
+                <li>Change network from "Mainnet" to <strong>"Devnet"</strong></li>
+                <li>Get free devnet SOL from <a href="https://faucet.solana.com" target="_blank" rel="noopener noreferrer" className="text-orange-300 underline hover:text-orange-100">faucet.solana.com</a> for transaction fees</li>
+              </ol>
+            </div>
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
               <WalletMultiButton className="!bg-white !text-primary hover:!bg-white/90 !border-0 !rounded-lg !font-semibold !px-6 !py-3" />
               <Button 
