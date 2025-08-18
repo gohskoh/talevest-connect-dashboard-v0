@@ -1,22 +1,20 @@
 import Header from "../components/Header"
-import { useState } from "react"
+import { useAccount, useDisconnect } from 'wagmi'
+import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle } from "lucide-react"
 
 const Token = () => {
-  // Stub wallet functionality for non-voting pages
-  const [isConnected, setIsConnected] = useState(false)
-  const [address, setAddress] = useState<string | undefined>(undefined)
+  const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
 
   const handleConnectWallet = () => {
     if (isConnected) {
-      setIsConnected(false)
-      setAddress(undefined)
+      disconnect()
     } else {
-      // Redirect to voting page for actual wallet functionality
-      window.location.href = '/vote'
+      modal.open()
     }
   }
 

@@ -1,4 +1,6 @@
 import Header from "../components/Header"
+import { useAccount, useDisconnect } from 'wagmi'
+import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -9,15 +11,14 @@ import { useVoting } from '../hooks/useVoting'
 
 // Talent Voting Page
 const Vote = () => {
+  const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
   const solanaWallet = useWallet()
   const voting = useVoting()
 
   const handleConnectWallet = () => {
-    if (solanaWallet.connected) {
-      solanaWallet.disconnect()
-    } else {
-      solanaWallet.select(solanaWallet.wallets[0]?.adapter.name || null)
-    }
+    if (isConnected) disconnect()
+    else modal.open()
   }
 
   // SEO
@@ -61,7 +62,7 @@ const Vote = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header onConnectWallet={handleConnectWallet} isConnected={solanaWallet.connected} address={solanaWallet.publicKey?.toBase58()} />
+      <Header onConnectWallet={handleConnectWallet} isConnected={isConnected} address={address} />
 
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6">

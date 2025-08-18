@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { modal } from '../lib/wallet-config'
 import Header from "../components/Header"
 import HeroSection from "../components/HeroSection"
 import EcosystemSection from "../components/EcosystemSection"
@@ -6,17 +8,14 @@ import HowItWorksSection from "../components/HowItWorksSection"
 import StatsSection from "../components/StatsSection"
 
 const Index = () => {
-  // Stub wallet functionality for non-voting pages
-  const [isConnected, setIsConnected] = useState(false)
-  const [address, setAddress] = useState<string | undefined>(undefined)
+  const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
 
   const handleConnectWallet = () => {
     if (isConnected) {
-      setIsConnected(false)
-      setAddress(undefined)
+      disconnect()
     } else {
-      // Redirect to voting page for actual wallet functionality
-      window.location.href = '/vote'
+      modal.open()
     }
   }
 
