@@ -12,6 +12,7 @@ export const useVoting = () => {
   const [votingResults, setVotingResults] = useState<VotingResults>({ candidateAVotes: 0, candidateBVotes: 0, totalVotes: 0 });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isVoting, setIsVoting] = useState<boolean>(false);
+  const [votingForTalent, setVotingForTalent] = useState<string | null>(null);
 
   // Initialize voting client when wallet connects
   useEffect(() => {
@@ -95,7 +96,7 @@ export const useVoting = () => {
     }
   };
 
-  const castVote = useCallback(async (candidate: 0 | 1, candidateName: string) => {
+  const castVote = useCallback(async (candidate: 0 | 1, candidateName: string, talentId: string) => {
     if (!wallet.connected || !wallet.publicKey) {
       toast({
         title: "Wallet Not Connected",
@@ -133,6 +134,7 @@ export const useVoting = () => {
     }
 
     setIsVoting(true);
+    setVotingForTalent(talentId);
     try {
       const txSignature = await votingClient.vote(wallet, candidate);
       
@@ -160,6 +162,7 @@ export const useVoting = () => {
       return false;
     } finally {
       setIsVoting(false);
+      setVotingForTalent(null);
     }
   }, [wallet, votingClient, tvstBalance, hasVoted, solBalance]);
 
@@ -182,6 +185,7 @@ export const useVoting = () => {
     votingResults,
     isLoading,
     isVoting,
+    votingForTalent,
     isConnected: wallet.connected,
     publicKey: wallet.publicKey,
 

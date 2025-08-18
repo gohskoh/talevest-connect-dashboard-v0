@@ -47,7 +47,7 @@ const Vote = () => {
   const totalVotes = voting.votingResults.totalVotes
 
   const castVote = async (talent: Talent) => {
-    await voting.castVote(talent.candidate, talent.name)
+    await voting.castVote(talent.candidate, talent.name, talent.id)
   }
 
   return (
@@ -133,6 +133,7 @@ const Vote = () => {
               // Get votes for this candidate from blockchain
               const v = t.candidate === 0 ? candidateAVotes : candidateBVotes
               const share = totalVotes > 0 ? Math.round((v / totalVotes) * 100) : 0
+              const isThisTalentVoting = voting.votingForTalent === t.id
               const isDisabled = !voting.canVote || voting.isVoting || voting.hasVoted
               
               return (
@@ -167,7 +168,7 @@ const Vote = () => {
                     >
                       {!solanaWallet.connected 
                         ? 'Connect Wallet to Vote' 
-                        : voting.isVoting 
+                        : isThisTalentVoting 
                         ? 'Submitting Vote...' 
                         : voting.hasVoted 
                         ? 'Already Voted This Round' 

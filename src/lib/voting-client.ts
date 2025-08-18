@@ -145,6 +145,9 @@ export class VotingClient {
     );
 
     try {
+      // Get fresh blockhash to avoid stale blockhash errors
+      const { blockhash, lastValidBlockHeight } = await this.connection.getLatestBlockhash('finalized');
+      
       const tx = await this.program.methods
         .vote(candidate)
         .accounts({
@@ -155,7 +158,11 @@ export class VotingClient {
           systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
         })
-        .rpc();
+        .rpc({
+          commitment: 'finalized',
+          skipPreflight: false,
+          preflightCommitment: 'finalized'
+        });
 
       return tx;
     } catch (error) {
@@ -166,6 +173,8 @@ export class VotingClient {
         throw new Error('You need TVST tokens to vote');
       } else if (error.message.includes('InvalidCandidate')) {
         throw new Error('Invalid candidate selection');
+      } else if (error.message.includes('Blockhash not found')) {
+        throw new Error('Network congestion. Please try again in a moment.');
       }
       throw new Error('Failed to submit vote. Please try again.');
     }
