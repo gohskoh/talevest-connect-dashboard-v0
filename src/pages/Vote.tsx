@@ -1,25 +1,15 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo } from "react"
 import { useWallet } from '@solana/wallet-adapter-react'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useVoting } from '../hooks/useVoting'
 
 // Talent Voting Page
 const Vote = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
   const solanaWallet = useWallet()
   const voting = useVoting()
-
-  const handleConnectWallet = () => {
-    if (isConnected) disconnect()
-    else modal.open()
-  }
 
   // SEO
   useEffect(() => {
@@ -62,7 +52,7 @@ const Vote = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header onConnectWallet={handleConnectWallet} isConnected={isConnected} address={address} />
+      <Header />
 
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6">
@@ -72,24 +62,8 @@ const Vote = () => {
             <p className="text-white/80 max-w-3xl mx-auto mb-6">
               Help the community decide which verified talent should launch their Initial Talent Offering (ITO) next.
             </p>
-            {/* Devnet Network Notice */}
-            <div className="bg-orange-500/20 border border-orange-500/30 rounded-lg p-4 mb-6 max-w-2xl mx-auto">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-orange-400">⚠️</span>
-                <h3 className="text-orange-300 font-semibold">Important: Switch to Devnet</h3>
-              </div>
-              <p className="text-orange-200 text-sm">
-                This voting system runs on <strong>Solana Devnet</strong>. Please:
-              </p>
-              <ol className="text-orange-200 text-sm mt-2 ml-4 list-decimal">
-                <li>Open your Phantom wallet settings</li>
-                <li>Change network from "Mainnet" to <strong>"Devnet"</strong></li>
-                <li>Get free devnet SOL from <a href="https://faucet.solana.com" target="_blank" rel="noopener noreferrer" className="text-orange-300 underline hover:text-orange-100">faucet.solana.com</a> for transaction fees</li>
-              </ol>
-            </div>
-
+            
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-              <WalletMultiButton className="!bg-white !text-primary hover:!bg-white/90 !border-0 !rounded-lg !font-semibold !px-6 !py-3" />
               <Button 
                 onClick={() => window.location.href = '/talent-application'} 
                 className="bg-white/10 text-white border border-white/20 hover:bg-white/20"
@@ -98,10 +72,36 @@ const Vote = () => {
               </Button>
             </div>
             {solanaWallet.connected && (
-              <div className="flex items-center justify-center gap-6 text-sm text-white/70">
-                <span>TVST Balance: {voting.tvstBalance.toFixed(2)}</span>
-                <span>SOL Balance: {voting.solBalance.toFixed(3)}</span>
-                {voting.hasVoted && <Badge className="bg-green-500/20 text-green-400 border-green-500/30">✓ Voted</Badge>}
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 mb-6 max-w-2xl mx-auto">
+                <div className="flex items-center justify-center gap-6 text-sm">
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-white">{voting.tvstBalance.toFixed(2)}</div>
+                    <div className="text-white/70">TVST Balance</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-white">{voting.solBalance.toFixed(3)}</div>
+                    <div className="text-white/70">SOL Balance</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-white">{voting.votingPower}</div>
+                    <div className="text-white/70">Voting Power</div>
+                  </div>
+                  {voting.hasVoted && (
+                    <div className="text-center">
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30">✓ Already Voted</Badge>
+                    </div>
+                  )}
+                </div>
+                {!voting.canVote && solanaWallet.connected && !voting.hasVoted && (
+                  <div className="mt-3 text-center">
+                    {voting.tvstBalance === 0 && (
+                      <p className="text-orange-300 text-sm">⚠️ You need TVST tokens to vote</p>
+                    )}
+                    {voting.solBalance < 0.01 && (
+                      <p className="text-orange-300 text-sm">⚠️ You need at least 0.01 SOL for transaction fees</p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -160,12 +160,22 @@ const Vote = () => {
                     <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mb-4">
                       <div className="h-2 bg-white/60 rounded-full transition-all" style={{ width: `${share}%` }} />
                     </div>
-                    <Button 
+                     <Button 
                       onClick={() => castVote(t)} 
                       disabled={isDisabled}
                       className="w-full bg-white text-primary hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {voting.isVoting ? 'Voting...' : voting.hasVoted ? 'Already Voted' : `Vote for ${t.name.split(' ')[0]}`}
+                      {!solanaWallet.connected 
+                        ? 'Connect Wallet to Vote' 
+                        : voting.isVoting 
+                        ? 'Submitting Vote...' 
+                        : voting.hasVoted 
+                        ? 'Already Voted This Round' 
+                        : voting.tvstBalance === 0
+                        ? 'Need TVST Tokens'
+                        : voting.solBalance < 0.01
+                        ? 'Need SOL for Fees'
+                        : `Vote for ${t.name.split(' ')[0]}`}
                     </Button>
                   </CardContent>
                 </Card>

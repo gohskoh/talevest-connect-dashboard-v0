@@ -199,7 +199,7 @@ const TalentApplication = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header onConnectWallet={handleConnectWallet} isConnected={isConnected} address={address} />
+      <Header />
       
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6 max-w-2xl">

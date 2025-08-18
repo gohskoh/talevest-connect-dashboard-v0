@@ -1,21 +1,9 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 const Floor = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
-
-  const handleConnectWallet = () => {
-    if (isConnected) {
-      disconnect()
-    } else {
-      modal.open()
-    }
-  }
 
   const marketData = [
     {
@@ -57,11 +45,7 @@ const Floor = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header 
-        onConnectWallet={handleConnectWallet}
-        isConnected={isConnected}
-        address={address}
-      />
+      <Header />
       
       <main className="pt-32 pb-16 relative">
         <div className="absolute inset-0 z-10 flex items-center justify-center">

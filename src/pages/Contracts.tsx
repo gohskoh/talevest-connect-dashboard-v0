@@ -1,26 +1,10 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
 
 const Contracts = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
-
-  const handleConnectWallet = () => {
-    if (isConnected) {
-      disconnect()
-    } else {
-      modal.open()
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header 
-        onConnectWallet={handleConnectWallet}
-        isConnected={isConnected}
-        address={address}
-      />
+      <Header />
       
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6 text-center">

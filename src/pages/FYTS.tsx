@@ -1,22 +1,10 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Link } from "react-router-dom"
 
 const FYTS = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
-
-  const handleConnectWallet = () => {
-    if (isConnected) {
-      disconnect()
-    } else {
-      modal.open()
-    }
-  }
 
   const talents = [
     {
@@ -143,11 +131,7 @@ const FYTS = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header 
-        onConnectWallet={handleConnectWallet}
-        isConnected={isConnected}
-        address={address}
-      />
+      <Header />
       
       <main className="pt-32 pb-16 relative">
         <div className="absolute inset-0 z-10 flex items-center justify-center">

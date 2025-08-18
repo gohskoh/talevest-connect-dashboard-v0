@@ -1,22 +1,10 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle } from "lucide-react"
 
 const Token = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
-
-  const handleConnectWallet = () => {
-    if (isConnected) {
-      disconnect()
-    } else {
-      modal.open()
-    }
-  }
 
   const tokenomics = [
     { label: "Public Sale", percentage: "40%", amount: "8.4M TVST", color: "bg-blue-500" },
@@ -77,11 +65,7 @@ const Token = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <Header 
-        onConnectWallet={handleConnectWallet}
-        isConnected={isConnected}
-        address={address}
-      />
+      <Header />
       
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-6">

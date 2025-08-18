@@ -2,17 +2,16 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
+import { useWallet } from '@solana/wallet-adapter-react'
+import { WalletConnectModal } from './WalletConnectModal'
 
+interface HeaderProps {}
 
-interface HeaderProps {
-  onConnectWallet: () => void
-  isConnected: boolean
-  address?: string
-}
-
-const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
+const Header = ({}: HeaderProps) => {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [walletModalOpen, setWalletModalOpen] = useState(false)
+  const { connected, publicKey, disconnect } = useWallet()
 
   const navItems = [
     { name: "F.Y.T.S.", href: "/fyts" },
@@ -27,6 +26,14 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleWalletAction = () => {
+    if (connected) {
+      disconnect()
+    } else {
+      setWalletModalOpen(true)
+    }
   }
 
   return (
@@ -57,12 +64,12 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
           {/* Desktop Connect Wallet Button */}
           <div className="hidden md:block">
             <Button
-              onClick={onConnectWallet}
+              onClick={handleWalletAction}
               variant="outline"
               size="default"
               className="text-sm bg-transparent border-white/40 text-white hover:bg-white/10 hover:border-white/60 shadow-lg backdrop-blur-sm"
             >
-              {isConnected ? formatAddress(address || "") : "Connect Wallet"}
+              {connected ? formatAddress(publicKey?.toBase58() || "") : "Connect Wallet"}
             </Button>
           </div>
 
@@ -95,19 +102,23 @@ const Header = ({ onConnectWallet, isConnected, address }: HeaderProps) => {
               ))}
               <Button
                 onClick={() => {
-                  onConnectWallet()
+                  handleWalletAction()
                   setIsMobileMenuOpen(false)
                 }}
                 variant="outline"
                 size="default"
                 className="text-sm w-full mt-4 bg-transparent border-white/40 text-white hover:bg-white/10 hover:border-white/60 shadow-lg backdrop-blur-sm"
               >
-                {isConnected ? formatAddress(address || "") : "Connect Wallet"}
+                {connected ? formatAddress(publicKey?.toBase58() || "") : "Connect Wallet"}
               </Button>
             </nav>
           </div>
         )}
       </div>
+      <WalletConnectModal 
+        open={walletModalOpen} 
+        onClose={() => setWalletModalOpen(false)} 
+      />
     </header>
   )
 }
