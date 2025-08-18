@@ -1,20 +1,22 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Link } from "react-router-dom"
 
 const FYTS = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
+  // Stub wallet functionality for non-voting pages
+  const [isConnected, setIsConnected] = useState(false)
+  const [address, setAddress] = useState<string | undefined>(undefined)
 
   const handleConnectWallet = () => {
     if (isConnected) {
-      disconnect()
+      setIsConnected(false)
+      setAddress(undefined)
     } else {
-      modal.open()
+      // Redirect to voting page for actual wallet functionality
+      window.location.href = '/vote'
     }
   }
 

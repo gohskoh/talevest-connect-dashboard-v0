@@ -10,8 +10,6 @@ import { useToast } from "@/hooks/use-toast"
 import { useNavigate } from "react-router-dom"
 import { Upload, ArrowLeft } from "lucide-react"
 import Header from "@/components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '@/lib/wallet-config'
 
 const TalentApplication = () => {
   const [formData, setFormData] = useState({
@@ -34,12 +32,18 @@ const TalentApplication = () => {
   const [user, setUser] = useState<any>(null)
   const { toast } = useToast()
   const navigate = useNavigate()
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
+  // Stub wallet functionality for non-voting pages
+  const [isConnected, setIsConnected] = useState(false)
+  const [address, setAddress] = useState<string | undefined>(undefined)
 
   const handleConnectWallet = () => {
-    if (isConnected) disconnect()
-    else modal.open()
+    if (isConnected) {
+      setIsConnected(false)
+      setAddress(undefined)
+    } else {
+      // Redirect to voting page for actual wallet functionality
+      window.location.href = '/vote'
+    }
   }
 
   useEffect(() => {

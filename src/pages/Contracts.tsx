@@ -1,16 +1,18 @@
 import Header from "../components/Header"
-import { useAccount, useDisconnect } from 'wagmi'
-import { modal } from '../lib/wallet-config'
+import { useState } from "react"
 
 const Contracts = () => {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
+  // Stub wallet functionality for non-voting pages  
+  const [isConnected, setIsConnected] = useState(false)
+  const [address, setAddress] = useState<string | undefined>(undefined)
 
   const handleConnectWallet = () => {
     if (isConnected) {
-      disconnect()
+      setIsConnected(false)
+      setAddress(undefined)
     } else {
-      modal.open()
+      // Redirect to voting page for actual wallet functionality
+      window.location.href = '/vote'
     }
   }
 
