@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -12,6 +12,13 @@ const Header = ({}: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [walletModalOpen, setWalletModalOpen] = useState(false)
   const { connected, publicKey, disconnect } = useWallet()
+
+  // Close wallet modal when wallet connects
+  useEffect(() => {
+    if (connected) {
+      setWalletModalOpen(false)
+    }
+  }, [connected])
 
   const navItems = [
     { name: "F.Y.T.S.", href: "/fyts" },
