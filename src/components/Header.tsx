@@ -24,7 +24,8 @@ const Header = ({}: HeaderProps) => {
     { name: "F.Y.T.S.", href: "/fyts" },
     { name: "The Floor", href: "/floor" },
     { name: "TVST Token", href: "/token" },
-    { name: "Talent Voting", href: "/vote" }
+    { name: "Talent Voting", href: "/vote" },
+    { name: "Airdrop", href: "/airdrop" }
   ]
 
   const formatAddress = (addr: string) => {

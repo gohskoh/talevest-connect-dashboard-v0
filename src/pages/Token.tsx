@@ -42,26 +42,7 @@ const Token = () => {
     }
   ]
 
-  const proposals = [
-    {
-      id: "TIP-001",
-      title: "Add Music Category",
-      description: "Proposal to add music talents to the platform",
-      status: "Active",
-      forVotes: "65%",
-      againstVotes: "35%",
-      timeLeft: "3 days"
-    },
-    {
-      id: "TIP-002", 
-      title: "Reduce Platform Fees",
-      description: "Proposal to reduce trading fees from 2.5% to 2%",
-      status: "Active",
-      forVotes: "78%",
-      againstVotes: "22%", 
-      timeLeft: "5 days"
-    }
-  ]
+  const proposals: any[] = []
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -88,19 +69,19 @@ const Token = () => {
             </Card>
             <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-white">$0.45</div>
+                <div className="text-2xl font-bold text-white">Coming Soon</div>
                 <div className="text-sm text-white/70">Current Price</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-white">8.4M</div>
+                <div className="text-2xl font-bold text-white">Coming Soon</div>
                 <div className="text-sm text-white/70">Circulating</div>
               </CardContent>
             </Card>
             <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-white">$9.45M</div>
+                <div className="text-2xl font-bold text-white">Coming Soon</div>
                 <div className="text-sm text-white/70">Market Cap</div>
               </CardContent>
             </Card>
@@ -115,7 +96,7 @@ const Token = () => {
               <CardContent>
                 <div className="text-center mb-4">
                   <div className="text-3xl font-bold text-white">1,250 TVST</div>
-                  <div className="text-white/70">≈ $562.50 USD</div>
+                  <div className="text-white/70">Connect wallet to view balance</div>
                   <Badge className="mt-2 bg-green-600 text-white">Governance Eligible</Badge>
                 </div>
                 <div className="flex gap-2">
@@ -183,32 +164,23 @@ const Token = () => {
               <h2 className="text-2xl font-bold text-white mb-4">Governance</h2>
               <p className="text-white/70 mb-6">Participate in platform governance and shape the future of Talevest</p>
               
-              <div className="flex gap-2 mb-4">
-                <Button className="bg-white text-primary hover:bg-white/90">Active Proposals</Button>
-                <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10">Passed</Button>
-                <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10">Create Proposal</Button>
-              </div>
-
-              <div className="space-y-4">
-                {proposals.map((proposal, index) => (
-                  <Card key={index} className="bg-white/10 backdrop-blur-sm border border-white/20">
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-bold text-white">{proposal.id}: {proposal.title}</h4>
-                        <Badge className="bg-white text-primary">{proposal.status}</Badge>
-                      </div>
-                      <p className="text-sm text-white/70 mb-3">{proposal.description}</p>
-                      <div className="flex justify-between items-center mb-3">
-                        <div className="text-sm">
-                          <span className="text-green-400">For: {proposal.forVotes}</span>
-                          <span className="text-red-400 ml-4">Against: {proposal.againstVotes}</span>
-                        </div>
-                        <div className="text-sm text-white/70">Ends in {proposal.timeLeft}</div>
-                      </div>
-                      <Button size="sm" className="bg-white text-primary hover:bg-white/90">Vote Now</Button>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">🏗️</div>
+                <h3 className="text-xl font-bold text-white mb-2">Coming Soon</h3>
+                <p className="text-white/70 mb-4">
+                  Governance features will be available once the platform launches
+                </p>
+                <div className="space-y-2">
+                  <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 mr-2" disabled>
+                    Active Proposals
+                  </Button>
+                  <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 mr-2" disabled>
+                    Passed
+                  </Button>
+                  <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10" disabled>
+                    Create Proposal
+                  </Button>
+                </div>
               </div>
 
               <div className="mt-6">

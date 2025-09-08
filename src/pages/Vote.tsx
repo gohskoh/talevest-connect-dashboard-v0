@@ -34,12 +34,7 @@ const Vote = () => {
 
   type Talent = { id: string; name: string; category: string; blurb: string; avatar: string; candidate: 0 | 1 }
 
-  const initialTalents: Talent[] = useMemo(() => ([
-    { id: 'MAR', name: 'Marcus Rodriguez', category: 'Sports • Football', blurb: 'Lightning-fast striker and youth champion.', avatar: 'MR', candidate: 0 },
-    { id: 'SCH', name: 'Sophia Chen', category: 'Entertainment • Creator', blurb: 'Viral creator with explosive growth.', avatar: 'SC', candidate: 1 },
-    { id: 'EWA', name: 'Emma Walsh', category: 'Art • Digital', blurb: 'NFT-native artist with sold-out drops.', avatar: 'EW', candidate: 0 },
-    { id: 'AIP', name: 'Aisha Patel', category: 'Sports • Tennis', blurb: 'National finalist with Olympic ambitions.', avatar: 'AP', candidate: 1 },
-  ]), [])
+  const initialTalents: Talent[] = useMemo(() => ([]), [])
 
   // Use blockchain data for vote counts
   const candidateAVotes = voting.votingResults.candidateAVotes
@@ -128,60 +123,18 @@ const Vote = () => {
           </div>
 
           {/* Talent Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {initialTalents.map((t) => {
-              // Get votes for this candidate from blockchain
-              const v = t.candidate === 0 ? candidateAVotes : candidateBVotes
-              const share = totalVotes > 0 ? Math.round((v / totalVotes) * 100) : 0
-              const isThisTalentVoting = voting.votingForTalent === t.id
-              const isDisabled = !voting.canVote || voting.isVoting || voting.hasVoted
-              
-              return (
-                <Card key={t.id} className="bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all">
-                  <CardHeader>
-                    <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-white font-bold">
-                        {t.avatar}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-white font-bold text-lg">{t.name}</h3>
-                          <Badge className="bg-white/10 text-white border-white/20">Verified</Badge>
-                        </div>
-                        <p className="text-white/70 text-sm">{t.category}</p>
-                        <p className="text-white/80 text-sm mt-1">{t.blurb}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="mb-3 flex items-center justify-between">
-                      <span className="text-sm text-white/70">Votes</span>
-                      <span className="text-sm font-semibold text-white">{v} ({share}%)</span>
-                    </div>
-                    <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mb-4">
-                      <div className="h-2 bg-white/60 rounded-full transition-all" style={{ width: `${share}%` }} />
-                    </div>
-                     <Button 
-                      onClick={() => castVote(t)} 
-                      disabled={isDisabled}
-                      className="w-full bg-white text-primary hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {!solanaWallet.connected 
-                        ? 'Connect Wallet to Vote' 
-                        : isThisTalentVoting 
-                        ? 'Submitting Vote...' 
-                        : voting.hasVoted 
-                        ? 'Already Voted This Round' 
-                        : voting.tvstBalance === 0
-                        ? 'Need TVST Tokens'
-                        : voting.solBalance < 0.01
-                        ? 'Need SOL for Fees'
-                        : `Vote for ${t.name.split(' ')[0]}`}
-                    </Button>
-                  </CardContent>
-                </Card>
-              )
-            })}
+          <div className="text-center py-12">
+            <div className="text-8xl mb-6">🎭</div>
+            <h2 className="text-3xl font-bold text-white mb-4">No Talents Available</h2>
+            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+              We're currently reviewing talent applications. Check back soon to see verified talents ready for voting!
+            </p>
+            <Button 
+              onClick={() => window.location.href = '/talent-application'} 
+              className="bg-white text-primary hover:bg-white/90"
+            >
+              Apply to Be Listed
+            </Button>
           </div>
         </div>
       </main>

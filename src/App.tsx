@@ -12,6 +12,7 @@ import Vote from "./pages/Vote";
 import Contracts from "./pages/Contracts";
 import Auth from "./pages/Auth";
 import TalentApplication from "./pages/TalentApplication";
+import Airdrop from "./pages/Airdrop";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/vote" element={<Vote />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/talent-application" element={<TalentApplication />} />
+            <Route path="/airdrop" element={<Airdrop />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
