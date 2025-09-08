@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      airdrop_codes: {
+        Row: {
+          code: string
+          created_at: string
+          date: string
+          id: string
+          is_active: boolean
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          date: string
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          date?: string
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -98,12 +125,71 @@ export type Database = {
         }
         Relationships: []
       }
+      user_airdrop_claims: {
+        Row: {
+          claimed_at: string
+          code_id: string
+          id: string
+          tvst_earned: number
+          user_id: string
+        }
+        Insert: {
+          claimed_at?: string
+          code_id: string
+          id?: string
+          tvst_earned?: number
+          user_id: string
+        }
+        Update: {
+          claimed_at?: string
+          code_id?: string
+          id?: string
+          tvst_earned?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_airdrop_claims_code_id_fkey"
+            columns: ["code_id"]
+            isOneToOne: false
+            referencedRelation: "airdrop_codes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_tvst_balance: {
+        Row: {
+          created_at: string
+          id: string
+          total_mined: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          total_mined?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          total_mined?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      process_airdrop_claim: {
+        Args: { p_code: string }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
