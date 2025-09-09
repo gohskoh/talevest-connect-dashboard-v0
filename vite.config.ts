@@ -21,8 +21,10 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     global: 'globalThis',
+    'global.Buffer': ['buffer', 'Buffer'],
+    'global.process': ['process', 'default'],
   },
   optimizeDeps: {
-    include: ['buffer'],
+    include: ['buffer', 'process'],
   },
 }));
