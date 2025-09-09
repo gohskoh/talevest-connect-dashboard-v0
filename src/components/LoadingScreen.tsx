@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import talevestLogo from '@/assets/talevest-logo.png'
 
 interface LoadingScreenProps {
   message?: string
@@ -25,7 +26,7 @@ const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
         <div className="mb-8">
           <div className="relative">
             <img 
-              src="/src/assets/talevest-logo.png" 
+              src={talevestLogo} 
               alt="Talevest" 
               className="h-16 w-16 mx-auto animate-bounce"
             />
