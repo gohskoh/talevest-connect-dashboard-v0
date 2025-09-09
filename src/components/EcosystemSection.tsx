@@ -28,7 +28,7 @@ const EcosystemSection = () => {
       icon: <Coins className="w-8 h-8 text-primary" />,
       title: "TVST Token",
       subtitle: "Governance & Utility",
-      description: "ERC-20 governance token with 21M supply providing exclusive access and voting rights.",
+      description: "ERC-20 governance token with 10M supply providing exclusive access and voting rights.",
       features: ["Early ITO access", "Governance voting", "Exclusive rewards"],
       link: "/token",
       linkText: "Learn More →"

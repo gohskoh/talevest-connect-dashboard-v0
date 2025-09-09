@@ -68,7 +68,7 @@ const HeroSection = () => {
             <div className="text-sm text-white/70">Sports Market</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">21M</div>
+            <div className="text-2xl font-bold text-white">10M</div>
             <div className="text-sm text-white/70">TVST Supply</div>
           </div>
           <div className="text-center">

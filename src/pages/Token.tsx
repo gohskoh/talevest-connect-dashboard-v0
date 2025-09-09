@@ -7,12 +7,11 @@ import { CheckCircle } from "lucide-react"
 const Token = () => {
 
   const tokenomics = [
-    { label: "Public Sale", percentage: "40%", amount: "8.4M TVST", color: "bg-blue-500" },
-    { label: "Team & Advisors", percentage: "20%", amount: "4.2M TVST", color: "bg-green-500" },
-    { label: "Development", percentage: "15%", amount: "3.15M TVST", color: "bg-purple-500" },
-    { label: "Marketing", percentage: "10%", amount: "2.1M TVST", color: "bg-yellow-500" },
-    { label: "Liquidity", percentage: "10%", amount: "2.1M TVST", color: "bg-red-500" },
-    { label: "Reserve", percentage: "5%", amount: "1.05M TVST", color: "bg-gray-500" }
+    { label: "Staking Rewards", percentage: "40%", amount: "4M TVST", color: "bg-blue-500" },
+    { label: "Public Sale", percentage: "20%", amount: "2M TVST", color: "bg-green-500" },
+    { label: "Team", percentage: "20%", amount: "2M TVST", color: "bg-purple-500" },
+    { label: "Community", percentage: "10%", amount: "1M TVST", color: "bg-yellow-500" },
+    { label: "Marketing & Development", percentage: "10%", amount: "1M TVST", color: "bg-red-500" }
   ]
 
   const utilities = [
@@ -63,7 +62,7 @@ const Token = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-white">21M</div>
+                <div className="text-2xl font-bold text-white">10M</div>
                 <div className="text-sm text-white/70">Total Supply</div>
               </CardContent>
             </Card>
@@ -138,7 +137,7 @@ const Token = () => {
             {/* Tokenomics */}
             <div>
               <h2 className="text-2xl font-bold text-white mb-4">Tokenomics</h2>
-              <p className="text-white/70 mb-6">Distribution of 21 million TVST tokens</p>
+              <p className="text-white/70 mb-6">Distribution of 10 million TVST tokens</p>
               <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
                 <CardContent className="p-0">
                   <div className="space-y-0">

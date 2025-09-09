@@ -10,7 +10,7 @@ const StatsSection = () => {
       trend: "+12% YoY"
     },
     {
-      number: "21M",
+      number: "10M",
       label: "TVST Token Supply",
       description: "Fixed maximum supply of Talevest governance tokens",
       trend: "Fixed Cap"
