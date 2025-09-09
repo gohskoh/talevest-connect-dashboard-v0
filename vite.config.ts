@@ -25,9 +25,4 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: ['buffer'],
   },
-  build: {
-    rollupOptions: {
-      external: [],
-    },
-  },
 }));

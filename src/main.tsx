@@ -4,6 +4,7 @@ import './index.css'
 import { Buffer } from 'buffer'
 
 // Add Buffer polyfill for production builds
-globalThis.Buffer = Buffer
+(globalThis as any).Buffer = Buffer;
+(window as any).Buffer = Buffer;
 
 createRoot(document.getElementById("root")!).render(<App />);
