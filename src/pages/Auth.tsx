@@ -63,7 +63,10 @@ const Auth = () => {
             title: "Welcome back!",
             description: "You have successfully logged in.",
           })
-          navigate('/')
+          // Small delay to show the loading animation before redirect
+          setTimeout(() => {
+            navigate('/')
+          }, 1000)
         }
       } else {
         if (password !== confirmPassword) {
