@@ -111,7 +111,7 @@ const Airdrop = () => {
           title: "Success!",
           description: result.message || "Successfully claimed TVST!",
         })
-        setMinedTVST(prev => prev + (parseFloat(result.tvst_earned) || 0.001))
+        setMinedTVST(prev => prev + (parseFloat(result.tvst_earned) || 0.111111))
         setTodayClaimed(true)
         setSecretCode("")
       } else {
@@ -147,7 +147,7 @@ const Airdrop = () => {
               Daily Airdrop
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
-              Watch our daily video and discover the secret code to earn 0.001 TVST tokens every day!
+              Watch our daily video and discover the secret code to earn 0.111111 TVST tokens every day!
             </p>
           </div>
 
@@ -216,7 +216,7 @@ const Airdrop = () => {
                 <CardHeader>
                   <h3 className="text-xl font-bold text-white">Enter Secret Code</h3>
                   <p className="text-white/70">
-                    Enter the code from today's video to claim your 0.001 TVST
+                    Enter the code from today's video to claim your 0.111111 TVST
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -248,7 +248,7 @@ const Airdrop = () => {
                           ? "Processing..." 
                           : !user 
                           ? "Sign in to claim" 
-                          : "Claim 0.001 TVST"}
+                          : "Claim 0.111111 TVST"}
                       </Button>
                     )}
 
@@ -275,7 +275,7 @@ const Airdrop = () => {
                 <CardContent className="p-4">
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
-                      <div className="text-lg font-bold text-white">0.001</div>
+                      <div className="text-lg font-bold text-white">0.111111</div>
                       <div className="text-sm text-white/70">TVST per day</div>
                     </div>
                     <div>
@@ -285,7 +285,7 @@ const Airdrop = () => {
                   </div>
                   <div className="mt-4 pt-4 border-t border-white/20 text-center">
                     <div className="text-sm text-white/70">
-                      Potential yearly earnings: <span className="font-bold text-white">0.365 TVST</span>
+                      Potential yearly earnings: <span className="font-bold text-white">40.56 TVST</span>
                     </div>
                   </div>
                 </CardContent>
