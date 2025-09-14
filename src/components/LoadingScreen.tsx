@@ -1,27 +1,6 @@
-import { useEffect, useState } from 'react'
 import siteLogo from '@/assets/site-logo.png'
 
-interface LoadingScreenProps {
-  message?: string
-}
-
-const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
-  const [dots, setDots] = useState('')
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    // Ensure minimum display time
-    setIsVisible(true)
-    
-    const dotsInterval = setInterval(() => {
-      setDots(prev => {
-        if (prev === '...') return ''
-        return prev + '.'
-      })
-    }, 1200) // Slower dots animation
-
-    return () => clearInterval(dotsInterval)
-  }, [])
+const LoadingScreen = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center">
@@ -53,7 +32,7 @@ const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="100%" stopColor="hsl(var(--primary-glow))" />
+                  <stop offset="100%" stopColor="hsl(var(--accent))" />
                 </linearGradient>
               </defs>
             </svg>

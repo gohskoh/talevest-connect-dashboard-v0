@@ -25,7 +25,7 @@ const AppRoutes = () => {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return <LoadingScreen message="Loading Talevest" />
+    return <LoadingScreen />
   }
 
   return (

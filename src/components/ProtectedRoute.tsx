@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return <LoadingScreen message="Authenticating" />
+    return <LoadingScreen />
   }
 
   if (!user) {
