@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useNavigate } from "react-router-dom"
 import { Shield, Users, Zap, TrendingUp } from "lucide-react"
 import { useEffect } from "react"
-import talevestLogo from '@/assets/talevest-logo.png'
+import siteLogo from '@/assets/site-logo.png'
 
 const Landing = () => {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ const Landing = () => {
       <header className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-sm border-b border-white/20">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img src={talevestLogo} alt="Talevest" className="h-8 w-8" />
+            <img src={siteLogo} alt="Talevest" className="h-8 w-8" />
             <span className="text-xl font-bold text-white">Talevest</span>
           </div>
           <Button 
@@ -173,7 +173,7 @@ const Landing = () => {
       <footer className="py-8 px-6 border-t border-white/20">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <img src={talevestLogo} alt="Talevest" className="h-6 w-6" />
+            <img src={siteLogo} alt="Talevest" className="h-6 w-6" />
             <span className="text-lg font-bold text-white">Talevest</span>
           </div>
           <p className="text-white/60">

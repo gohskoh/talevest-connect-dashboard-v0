@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import talevestLogo from '@/assets/talevest-logo.png'
+import siteLogo from '@/assets/site-logo.png'
 
 interface LoadingScreenProps {
   message?: string
@@ -14,7 +14,7 @@ const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
         if (prev === '...') return ''
         return prev + '.'
       })
-    }, 500)
+    }, 800)
 
     return () => clearInterval(interval)
   }, [])
@@ -26,7 +26,7 @@ const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
         <div className="mb-8">
           <div className="relative inline-block">
             <img 
-              src={talevestLogo} 
+              src={siteLogo} 
               alt="Talevest" 
               className="h-24 w-24 mx-auto animate-pulse drop-shadow-2xl"
             />
