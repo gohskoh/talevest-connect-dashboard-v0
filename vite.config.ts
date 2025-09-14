@@ -17,14 +17,28 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      buffer: 'buffer',
+      process: 'process/browser',
     },
   },
   define: {
     global: 'globalThis',
-    'global.Buffer': ['buffer', 'Buffer'],
-    'global.process': ['process', 'default'],
+    'process.env': '{}',
   },
   optimizeDeps: {
-    include: ['buffer', 'process'],
+    include: [
+      'buffer', 
+      'process',
+      '@solana/web3.js',
+      '@solana/spl-token',
+      '@coral-xyz/anchor'
+    ],
+    esbuildOptions: {
+      target: 'esnext',
+      define: {
+        global: 'globalThis',
+      },
+      plugins: [],
+    },
   },
 }));
