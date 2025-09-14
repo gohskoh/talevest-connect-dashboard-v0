@@ -7,16 +7,20 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ message = "Loading..." }: LoadingScreenProps) => {
   const [dots, setDots] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Ensure minimum display time
+    setIsVisible(true)
+    
+    const dotsInterval = setInterval(() => {
       setDots(prev => {
         if (prev === '...') return ''
         return prev + '.'
       })
-    }, 800)
+    }, 1200) // Slower dots animation
 
-    return () => clearInterval(interval)
+    return () => clearInterval(dotsInterval)
   }, [])
 
   return (
