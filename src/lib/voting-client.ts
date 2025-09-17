@@ -58,8 +58,8 @@ export class VotingClient {
       { commitment: 'confirmed' }
     );
 
-    // Load IDL from production API
-    const response = await fetch('https://api.talevest.io/idl/tvst_solana_voting_devnet.json');
+    // Load IDL from public folder
+    const response = await fetch('/idl/tvst_solana_voting_devnet.json');
     const idl = await response.json();
 
     this.program = new Program(idl, provider);
