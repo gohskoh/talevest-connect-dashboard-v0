@@ -2,6 +2,7 @@ import { AnchorProvider, Program, web3, BN } from '@coral-xyz/anchor';
 import { Connection, PublicKey, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import type { WalletContextState } from '@solana/wallet-adapter-react';
+import idl from './idl/tvst_solana_voting_devnet.json';
 
 // Environment variables
 const TVST_MINT = new PublicKey('A4utwDL9JExUyrD85St47RKi77gVN5wKwfbqo3h6pcpv');
@@ -58,10 +59,7 @@ export class VotingClient {
       { commitment: 'confirmed' }
     );
 
-    // Load IDL from public folder
-    const response = await fetch('/idl/tvst_solana_voting_devnet.json');
-    const idl = await response.json();
-
+    // Use imported IDL
     this.program = new Program(idl, provider);
   }
 

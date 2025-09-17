@@ -1,0 +1,118 @@
+{
+  "address": "E9Kqxrhgr3ummcG27wowAZsCBMQtLYn7LaywV3iwzjVv",
+  "metadata": {
+    "name": "tvst_solana_voting_devnet",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "TVST Solana Voting Program"
+  },
+  "instructions": [
+    {
+      "name": "get_results",
+      "discriminator": [137, 44, 100, 59, 220, 97, 105, 111],
+      "accounts": [{"name": "vote_bank"}],
+      "args": []
+    },
+    {
+      "name": "initialize_vote_bank",
+      "discriminator": [119, 35, 112, 93, 167, 87, 240, 197],
+      "accounts": [
+        {
+          "name": "vote_bank",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {"kind": "const", "value": [118, 111, 116, 101, 95, 98, 97, 110, 107]},
+              {"kind": "arg", "path": "voting_id"}
+            ]
+          }
+        },
+        {"name": "tvst_mint"},
+        {"name": "authority", "writable": true, "signer": true},
+        {"name": "system_program", "address": "11111111111111111111111111111111"}
+      ],
+      "args": [
+        {"name": "candidate_a_mint", "type": "pubkey"},
+        {"name": "candidate_b_mint", "type": "pubkey"},
+        {"name": "voting_id", "type": "u64"},
+        {"name": "token_weighted", "type": "bool"}
+      ]
+    },
+    {
+      "name": "vote",
+      "discriminator": [227, 110, 155, 23, 136, 126, 172, 25],
+      "accounts": [
+        {
+          "name": "vote_bank",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {"kind": "const", "value": [118, 111, 116, 101, 95, 98, 97, 110, 107]},
+              {"kind": "account", "path": "vote_bank.voting_id", "account": "VoteBank"}
+            ]
+          }
+        },
+        {
+          "name": "voter_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {"kind": "const", "value": [118, 111, 116, 101, 114, 95, 114, 101, 99, 111, 114, 100]},
+              {"kind": "account", "path": "voter"},
+              {"kind": "account", "path": "vote_bank.voting_id", "account": "VoteBank"}
+            ]
+          }
+        },
+        {"name": "voter_token_account"},
+        {"name": "voter", "writable": true, "signer": true},
+        {"name": "system_program", "address": "11111111111111111111111111111111"},
+        {"name": "token_program", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+      ],
+      "args": [{"name": "candidate", "type": "u8"}]
+    }
+  ],
+  "accounts": [
+    {"name": "VoteBank", "discriminator": [83, 109, 30, 62, 146, 35, 200, 133]},
+    {"name": "VoterRecord", "discriminator": [178, 96, 138, 116, 143, 202, 115, 33]}
+  ],
+  "errors": [
+    {"code": 6000, "name": "AlreadyVoted", "msg": "Voter has already voted in this session"},
+    {"code": 6001, "name": "NoTvstTokens", "msg": "Voter does not have any TVST tokens"},
+    {"code": 6002, "name": "InvalidCandidate", "msg": "Invalid candidate selection"},
+    {"code": 6003, "name": "Overflow", "msg": "Arithmetic overflow"},
+    {"code": 6004, "name": "WrongMint", "msg": "Wrong token mint"},
+    {"code": 6005, "name": "WrongOwner", "msg": "Wrong token account owner"}
+  ],
+  "types": [
+    {
+      "name": "VoteBank",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {"name": "candidate_a_mint", "type": "pubkey"},
+          {"name": "candidate_b_mint", "type": "pubkey"},
+          {"name": "candidate_a_votes", "type": "u64"},
+          {"name": "candidate_b_votes", "type": "u64"},
+          {"name": "voting_id", "type": "u64"},
+          {"name": "token_weighted", "type": "bool"},
+          {"name": "tvst_mint", "type": "pubkey"},
+          {"name": "bump", "type": "u8"}
+        ]
+      }
+    },
+    {
+      "name": "VoterRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {"name": "voter", "type": "pubkey"},
+          {"name": "voting_id", "type": "u64"},
+          {"name": "has_voted", "type": "bool"},
+          {"name": "candidate_voted", "type": "u8"},
+          {"name": "voting_power_used", "type": "u64"},
+          {"name": "bump", "type": "u8"}
+        ]
+      }
+    }
+  ]
+}
